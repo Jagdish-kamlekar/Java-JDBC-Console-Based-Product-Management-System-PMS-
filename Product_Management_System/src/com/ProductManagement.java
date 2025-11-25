@@ -10,16 +10,13 @@ public class ProductManagement
 {
 	public static void main(String[] args) throws ClassNotFoundException, SQLException 
     {
-        // Assuming StaticConnection.getConnection() is available and working
+       
         Connection conn = DbConnection.getConnection(); 
         Scanner sc = new Scanner(System.in);
-        
-        // --- FIX: Initialize ch to avoid compilation error ---
+
         int ch = -1; 
         
-        // --- Main Execution Loop ---
         do {
-            // Replaced call to printSeparator("PRODUCT MANAGEMENT SYSTEM")
             System.out.println("\n=======================================================");
             System.out.println("                 PRODUCT MANAGEMENT SYSTEM");
             System.out.println("=======================================================\n\n");
@@ -34,16 +31,14 @@ public class ProductManagement
             System.out.println("-------------------------------------------------------");
             System.out.print("  ▶️ Enter Your Choice (0-5): ");
             
-            // Handle integer input validation
             if (!sc.hasNextInt()) {
                 System.out.println("\n❌ Invalid input! Please enter a number.");
-                sc.nextLine(); // Clear buffer
+                sc.nextLine(); 
                 continue;
             }
             ch = sc.nextInt();
-            sc.nextLine(); // Clear the buffer after reading int
+            sc.nextLine(); 
             
-            // Replaced call to printSeparator("OPERATION OUTPUT")
             System.out.println("\n=======================================================");
             System.out.println("                 OPERATION OUTPUT");
             System.out.println("=======================================================\n\n");
@@ -88,8 +83,8 @@ public class ProductManagement
                         String pbrand = sc.nextLine();
                         
                         System.out.print("Enter Product Price: ");
-                        double pr = sc.nextDouble(); // Reads price as double
-                        sc.nextLine(); // Clear buffer
+                        double pr = sc.nextDouble(); 
+                        sc.nextLine();
                         
                         ps1.setString(1, pname);
                         ps1.setString(2, pbrand);
@@ -110,7 +105,7 @@ public class ProductManagement
                         
                         System.out.print("Enter Product Code to delete: ");
                         int pc = sc.nextInt();
-                        sc.nextLine(); // Clear buffer
+                        sc.nextLine(); 
                         
                         ps2.setInt(1, pc);
                         int ie = ps2.executeUpdate();
@@ -135,7 +130,7 @@ public class ProductManagement
                             break;
                         }
                         int ch1 = sc.nextInt();
-                        sc.nextLine(); // CRITICAL FIX: Clears buffer
+                        sc.nextLine(); 
                         
                         int updateCode;
                         
@@ -146,7 +141,7 @@ public class ProductManagement
                                 String pname1 = sc.nextLine();
                                 System.out.print("Enter Product Code to update: ");
                                 updateCode = sc.nextInt();
-                                sc.nextLine(); // Clear buffer
+                                sc.nextLine(); 
                                 
                                 ps3.setString(1, pname1);
                                 ps3.setInt(2, updateCode);
@@ -163,7 +158,7 @@ public class ProductManagement
                                 String brand2 = sc.nextLine();
                                 System.out.print("Enter Product Code to update: ");
                                 updateCode = sc.nextInt();
-                                sc.nextLine(); // Clear buffer
+                                sc.nextLine(); 
                                 
                                 ps4.setString(1, brand2);
                                 ps4.setInt(2, updateCode);
@@ -177,7 +172,7 @@ public class ProductManagement
                             case 3:
                                 PreparedStatement ps5 = conn.prepareStatement("UPDATE products SET product_price = ? WHERE product_code = ?");
                                 System.out.print("Enter New Product Price: ");
-                                double pr1 = sc.nextDouble(); // Using double for accuracy
+                                double pr1 = sc.nextDouble(); 
                                 System.out.print("Enter Product Code to update: ");
                                 updateCode = sc.nextInt();
                                 sc.nextLine(); // Clear buffer
@@ -225,7 +220,7 @@ public class ProductManagement
                 System.out.println("\n🚨 An unexpected error occurred: " + e.getMessage());
             }
 
-            // Pause before looping back
+            
             if (ch != 0) {
                  System.out.print("\nPress Enter to continue to the main menu...");
                  sc.nextLine();
@@ -237,3 +232,4 @@ public class ProductManagement
         conn.close();
     }
 }
+
